@@ -1,8 +1,26 @@
 #!/usr/bin/env node
 var inspect = require('util').inspect
-var depth = process.argv.slice(2)[0] || 0
+var get = require('lodash.get')
+// var depth = process.argv.slice(2)[0] || 0
+var args = process.argv.slice(2)
 
-depth = Number(depth)
+if (args.length === 2) {
+  var path = args[0]
+  var depth = parseInt(args[1])
+} else if (args.length === 1) {
+  if (/^\d+$/.test(args[0])) {
+    var path = ''
+    var depth = parseInt(args[0])
+  } else {
+    var path = args[0]
+    var depth = 0
+  }
+} else if (args.length === 0) {
+  var path = ''
+  var depth = 0
+} else {
+  throw new Error('too many arguments')
+}
 
 var data = ''
 
@@ -14,6 +32,13 @@ function log () {
   } catch (error) {
     console.error("couldn't parse JSON", error)
     process.exit(1)
+  }
+
+  // replace '.' by '' to mimick jq syntax
+  path = path.replace(/^\./, '')
+
+  if (path !== '') {
+    obj = get(obj, path)
   }
 
   // inspect params: Object, showHidden, depth, colorize

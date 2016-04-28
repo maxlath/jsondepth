@@ -17,5 +17,8 @@
     "cli"
   ],
   "author": "maxlath",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "lodash.get": "^4.2.1"
+  }
 }

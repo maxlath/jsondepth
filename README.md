@@ -16,8 +16,6 @@ npm install -g jsondepth
 real world example:
 ```sh
 url=https://www.wikidata.org/w/api.php?action=wbgetentities&ids=Q1&format=json
-```
-```
 curl -s $url | jsondepth
 ```
 logs the object with only the first-level keys and values:
@@ -31,8 +29,7 @@ for the sake of convenience and lazyness, **jsondepth is aliased to jd**
 curl -s $url | jd
 ```
 
-###Pass the depth level as unique argument
-
+###Specify a depth level
 this is equivalent to the two previous one:
 ```
 curl -s $url | jd 0
@@ -53,4 +50,17 @@ curl -s $url | jd 2
 curl -s $url | jd 3
 curl -s $url | jd 4
 # etc
+```
+
+###Specify a path
+```sh
+curl -s $url | jd 'entities.Q1.aliases'
+# or to mimick jq syntax
+curl -s $url | jd '.entities.Q1.aliases'
+```
+
+###Specify a depth and a path
+if both a path and a depth are specified, **path should come first, depth second**
+```sh
+curl -s $url | jd 'entities.Q1.claims' 3
 ```
