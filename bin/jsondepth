@@ -8,7 +8,7 @@ if (args.length === 2) {
   var path = args[0]
   var depth = parseInt(args[1])
 } else if (args.length === 1) {
-  if (/^\d+$/.test(args[0])) {
+  if (/^-?\d+$/.test(args[0])) {
     var path = ''
     var depth = parseInt(args[0])
   } else {
@@ -39,6 +39,10 @@ function log () {
 
   if (path !== '') {
     obj = get(obj, path)
+  }
+
+  if (depth === -1) {
+    depth = Infinity
   }
 
   // inspect params: Object, showHidden, depth, colorize

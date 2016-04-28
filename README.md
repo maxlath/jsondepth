@@ -47,11 +47,16 @@ outputs:
 ```
 <hr>
 ![we need to go deeper](http://vignette3.wikia.nocookie.net/glee/images/6/6f/We-need-to-go-deeper_inception.jpg/revision/latest)
-```
+```sh
 curl -s $url | jd 2
 curl -s $url | jd 3
 curl -s $url | jd 4
 # etc
+```
+<hr>
+If you use [paths](#specify-a-path), you may wish to disable object wrapping: this can be done by passing `-1`. The advantage is that you are sure to get back a valid json object.
+```sh
+curl -s $url | jd -1
 ```
 
 ###Specify a path
