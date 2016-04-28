@@ -6,6 +6,8 @@ Working with super deep json objects from the terminal is a pain, unless you use
 [jq](https://github.com/stedolan/jq) is an awesome one, but doesn't handle object depths, afaik.<br>
 Here the idea is to **walk through a json object as you would read a summary**: level by level.
 
+The only downside being that the output might not be valid json, due to the wrapped object, but that's a fair price for readability while exploring a data set.
+
 ##Installation
 
 ```sh
@@ -54,13 +56,13 @@ curl -s $url | jd 4
 
 ###Specify a path
 ```sh
-curl -s $url | jd 'entities.Q1.aliases'
+curl -s $url | jd entities.Q1.aliases.fi.1
 # or to mimick jq syntax
-curl -s $url | jd '.entities.Q1.aliases'
+curl -s $url | jd .entities.Q1.aliases.fi.1
 ```
 
 ###Specify a depth and a path
 if both a path and a depth are specified, **path should come first, depth second**
 ```sh
-curl -s $url | jd 'entities.Q1.claims' 3
+curl -s $url | jd entities.Q1.claims.P31.0 3
 ```
