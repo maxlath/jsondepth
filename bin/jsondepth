@@ -1,0 +1,26 @@
+#!/usr/bin/env node
+var inspect = require('util').inspect
+var depth = process.argv.slice(2)[0] || 0
+
+depth = Number(depth)
+
+var data = ''
+
+function append (buf) { data += buf.toString() }
+
+function log () {
+  try {
+    var obj = JSON.parse(data)
+  } catch (error) {
+    console.error("couldn't parse JSON", error)
+    process.exit(1)
+  }
+
+  // inspect params: Object, showHidden, depth, colorize
+  console.log(inspect(obj, false, depth, true))
+  process.exit(0)
+}
+
+process.stdin
+.on('data', append)
+.on('close', log)
