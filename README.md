@@ -1,6 +1,8 @@
 #jsondepth
 a small command-line tool to walk through the depth levels of a json objects
 
+![screenshot](https://cloud.githubusercontent.com/assets/1596934/14911212/281e7abe-0df4-11e6-8810-6cfc660c35dd.png)
+
 ##Motivation
 Working with super deep json objects from the terminal is a pain, unless you use a good json parser.<br>
 [jq](https://github.com/stedolan/jq) is an awesome one, but doesn't handle object depths, afaik.<br>
