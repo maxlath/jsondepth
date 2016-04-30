@@ -20,5 +20,14 @@
   "license": "MIT",
   "dependencies": {
     "lodash.get": "^4.2.1"
-  }
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/maxlath/jsondepth.git"
+  },
+  "bugs": {
+    "url": "https://github.com/maxlath/jsondepth/issues"
+  },
+  "homepage": "https://github.com/maxlath/jsondepth#readme"
 }
