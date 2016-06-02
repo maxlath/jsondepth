@@ -73,3 +73,18 @@ if both a path and a depth are specified, **path should come first, depth second
 ```sh
 curl -s $url | jd entities.Q1.claims.P31.0 3
 ```
+
+###Access JS objects attributes
+####Native attributes
+#####Arrays `length`
+```sh
+curl -s $url | jd entities.Q1.aliases.en.length
+# => 5
+```
+####Special keys
+#####`_keys`
+apply `Object.keys` to the final object
+```sh
+curl -s $url | jd entities._keys
+# => ['Q1']
+```

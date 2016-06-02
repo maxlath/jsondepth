@@ -1,8 +1,9 @@
 #!/usr/bin/env node
 var inspect = require('util').inspect
 var get = require('lodash.get')
-// var depth = process.argv.slice(2)[0] || 0
 var args = process.argv.slice(2)
+
+var helpers = require('../lib/helpers')
 
 if (args.length === 2) {
   var path = args[0]
@@ -34,8 +35,9 @@ function log () {
     process.exit(1)
   }
 
-  // replace '.' by '' to mimick jq syntax
-  path = path.replace(/^\./, '')
+  var parsedPath = helpers.parsePath(path)
+  path = parsedPath[0]
+  specialKey = parsedPath[1]
 
   if (path !== '') {
     obj = get(obj, path)
@@ -43,6 +45,10 @@ function log () {
 
   if (depth === -1) {
     depth = Infinity
+  }
+
+  if (specialKey) {
+    obj = helpers.getSpecialValue(obj, specialKey)
   }
 
   // inspect params: Object, showHidden, depth, colorize
