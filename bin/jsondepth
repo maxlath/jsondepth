@@ -51,8 +51,11 @@ function log () {
     obj = helpers.getSpecialValue(obj, specialKey)
   }
 
+  // avoid colorizing when stdout isn' the terminal
+  var colorize = process.stdout.isTTY
+
   // inspect params: Object, showHidden, depth, colorize
-  console.log(inspect(obj, false, depth, true))
+  console.log(inspect(obj, false, depth, colorize))
   process.exit(0)
 }
 
