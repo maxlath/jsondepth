@@ -54,8 +54,12 @@ function log () {
   // avoid colorizing when stdout isn' the terminal
   var colorize = process.stdout.isTTY
 
-  // inspect params: Object, showHidden, depth, colorize
-  console.log(inspect(obj, false, depth, colorize))
+  if (typeof obj === 'string') {
+    console.log(obj)
+  } else {
+    // inspect params: Object, showHidden, depth, colorize
+    console.log(inspect(obj, false, depth, colorize))
+  }
   process.exit(0)
 }
 
