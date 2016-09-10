@@ -55,6 +55,7 @@ function log () {
   var colorize = process.stdout.isTTY
 
   if (typeof obj === 'string') {
+    // avoid using util.inspect on strings as it keeps the quotes
     console.log(obj)
   } else {
     // inspect params: Object, showHidden, depth, colorize
