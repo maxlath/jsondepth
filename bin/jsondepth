@@ -65,4 +65,4 @@ function log () {
 
 process.stdin
 .on('data', append)
-.on('close', log)
+.on('end', log)
