@@ -1,6 +1,8 @@
 #jsondepth
 a small command-line tool to walk through the depth levels of a json objects
 
+[![NPM](https://nodei.co/npm/jsondepth.png?stars&downloads&downloadRank)](https://npmjs.com/package/jsondepth/) [![NPM](https://nodei.co/npm-dl/jsondepth.png?months=6&height=3)](https://npmjs.com/package/jsondepth/)
+
 ![screenshot](https://cloud.githubusercontent.com/assets/1596934/14911212/281e7abe-0df4-11e6-8810-6cfc660c35dd.png)
 
 ##Motivation
