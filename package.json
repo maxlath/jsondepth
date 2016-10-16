@@ -8,7 +8,8 @@
     "jd": "./bin/jsondepth"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "update-toc": "doctoc README.md"
   },
   "keywords": [
     "json",
@@ -21,7 +22,9 @@
   "dependencies": {
     "lodash.get": "^4.2.1"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "doctoc": "^1.2.0"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/maxlath/jsondepth.git"
