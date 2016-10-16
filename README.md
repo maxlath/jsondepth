@@ -1,7 +1,7 @@
 # jsondepth
 A small command-line tool to walk through the depth levels of a json objects
 
-`output data | jd <PATH>=. <DEPTH>=0`
+`output json | jd <PATH>=. <DEPTH>=0`
 
 ![screenshot](https://cloud.githubusercontent.com/assets/1596934/19417977/b2025c36-93ba-11e6-85fa-6bd274eb6be4.png)
 
