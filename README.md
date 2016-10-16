@@ -1,9 +1,11 @@
 #jsondepth
-a small command-line tool to walk through the depth levels of a json objects
+A small command-line tool to walk through the depth levels of a json objects
 
-[![NPM](https://nodei.co/npm/jsondepth.png?stars&downloads&downloadRank)](https://npmjs.com/package/jsondepth/) [![NPM](https://nodei.co/npm-dl/jsondepth.png?months=6&height=3)](https://npmjs.com/package/jsondepth/)
+`output data | jd <PATH>=. <DEPTH>=0`
 
-![screenshot](https://cloud.githubusercontent.com/assets/1596934/14911212/281e7abe-0df4-11e6-8810-6cfc660c35dd.png)
+![screenshot](https://cloud.githubusercontent.com/assets/1596934/19417977/b2025c36-93ba-11e6-85fa-6bd274eb6be4.png)
+
+You can think of it as a wrapper of `_.get` and `util.inspect`
 
 ##Motivation
 Working with super deep json objects from the terminal is a pain, unless you use a good json parser.<br>
