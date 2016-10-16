@@ -23,6 +23,7 @@ You can think of it as a wrapper of [`_.get`](https://lodash.com/docs#get) (for 
       - [Arrays `length`](#arrays-length)
     - [Special keys](#special-keys)
       - [`_keys`](#_keys)
+  - [Format the output as valid JSON](#format-the-output-as-valid-json)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -111,3 +112,16 @@ apply `Object.keys` to the final object
 curl -s "$url" | jd entities._keys
 # => ['Q1']
 ```
+
+### Format the output as valid JSON
+Wrapped results like `{ entities: { Q1: [Object] }, success: 1 }` are more readible but aren't valid JSON. And sometimes, for whatever reason, you want a valid JSON output; there in a option for that: `--json|-j`
+```
+curl -s "$url" | jd entities.Q1.aliases --json
+```
+You can even specify the output indentation level (Between 0 and 9. Default: 2):
+```
+curl -s "$url" | jd entities.Q1.aliases --json=0
+curl -s "$url" | jd entities.Q1.aliases --json=4
+```
+
+Notice that it disables the depth option as it's responsible for the wrapping mechanism.
