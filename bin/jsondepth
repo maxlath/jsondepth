@@ -64,8 +64,6 @@ function log () {
     obj = helpers.getSpecialValue(obj, specialKey)
   }
 
-  // avoid colorizing when stdout isn't the terminal
-  var colorize = process.stdout.isTTY
 
   if (typeof obj === 'string') {
     // avoid using util.inspect on strings as it keeps the quotes
@@ -73,8 +71,10 @@ function log () {
   } else if (formatAsJson) {
     console.log(JSON.stringify(obj, null, jsonIndentation))
   } else {
-    // inspect params: Object, showHidden, depth, colorize
-    console.log(inspect(obj, false, depth, colorize))
+    // avoid colorizing when stdout isn't the terminal
+    var colors = process.stdout.isTTY
+    // util.inspect doc: https://nodejs.org/api/util.html#util_util_inspect_object_options
+    console.log(inspect(obj, { depth: depth, colors: colors, maxArrayLength: null }))
   }
   process.exit(0)
 }
