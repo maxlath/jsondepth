@@ -1,8 +1,7 @@
 #!/usr/bin/env node
 const inspect = require('util').inspect
-const get = require('lodash.get')
-const helpers = require('../lib/helpers')
 const jsonOptionRegex = /(--json|-j)(=(\d{1}))?/
+const getValue = require('../lib/get_value')
 
 var args = process.argv.slice(2)
 const argsString = args.join(' ')
@@ -48,22 +47,7 @@ function log () {
     process.exit(1)
   }
 
-  var parsedPath = helpers.parsePath(path)
-  path = parsedPath[0]
-  specialKey = parsedPath[1]
-
-  if (path !== '') {
-    obj = get(obj, path)
-  }
-
-  if (depth === -1) {
-    depth = Infinity
-  }
-
-  if (specialKey) {
-    obj = helpers.getSpecialValue(obj, specialKey)
-  }
-
+  var obj = getValue(obj, path)
 
   if (typeof obj === 'string') {
     // avoid using util.inspect on strings as it keeps the quotes

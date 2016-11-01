@@ -5,8 +5,6 @@ A small command-line tool to walk through the depth levels of a json objects
 
 ![screenshot](https://cloud.githubusercontent.com/assets/1596934/19417977/b2025c36-93ba-11e6-85fa-6bd274eb6be4.png)
 
-You can think of it as a wrapper of [`_.get`](https://lodash.com/docs#get) (for the path) and [`util.inspect`](https://nodejs.org/api/util.html#util_util_inspect_object_options) (for the depth)
-
 ## Summary
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
@@ -110,6 +108,20 @@ curl -s "$url" | jd entities.Q1.aliases.en.length
 apply `Object.keys` to the final object
 ```sh
 curl -s "$url" | jd entities._keys
+# => ['Q1']
+```
+##### `_values`
+apply `_.values` to an array
+```sh
+curl -s "$url" | jd entities._values
+# => [{ id: 'Q1', etc...}]
+curl -s "$url" | jd entities._values.0.id
+# => 'Q1'
+```
+##### `_map`
+map properties of an array
+```sh
+curl -s "$url" | jd entities._values._map.id
 # => ['Q1']
 ```
 
