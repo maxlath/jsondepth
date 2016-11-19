@@ -57,6 +57,7 @@ function log () {
   } else {
     // avoid colorizing when stdout isn't the terminal
     var colors = process.stdout.isTTY
+    if (depth === -1) depth = Infinity
     // util.inspect doc: https://nodejs.org/api/util.html#util_util_inspect_object_options
     console.log(inspect(obj, { depth: depth, colors: colors, maxArrayLength: null }))
   }
