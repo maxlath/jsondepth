@@ -21,7 +21,10 @@ A small command-line tool to walk through the depth levels of a json objects
       - [Arrays `length`](#arrays-length)
     - [Special keys](#special-keys)
       - [`_keys`](#_keys)
+      - [`_values`](#_values)
+      - [`_map`](#_map)
   - [Format the output as valid JSON](#format-the-output-as-valid-json)
+  - [Parse newline delimited JSON](#parse-newline-delimited-json)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -137,3 +140,6 @@ curl -s "$url" | jd entities.Q1.aliases --json=4
 ```
 
 Notice that it disables the depth option as it's responsible for the wrapping mechanism.
+
+### Parse newline delimited JSON
+When the input is [newline delimited JSON](http://ndjson.org/), filters are applied line by line.
