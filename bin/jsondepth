@@ -39,12 +39,22 @@ var data = ''
 
 function append (buf) { data += buf.toString() }
 
-function log () {
+function log (chunk) {
   try {
-    var obj = JSON.parse(data)
+    // A chunk can be a sub-part of the full data
+    // See the line by line parsing attempt bellow
+    // Beware of chunks that are empty strings that could trigger an infinite loop
+    if (chunk == null) chunk = data
+    var obj = JSON.parse(chunk)
   } catch (error) {
-    console.error("couldn't parse JSON", error)
-    process.exit(1)
+    // Try to parse line per line, keeping only lines that could be JSON
+    const lines = chunk.split('\n').filter((line) => line[0] === '{')
+    if (lines.length > 1) {
+      return lines.forEach(log)
+    } else {
+      console.error(`couldn't parse JSON: ${chunk.slice(0, 15)}...\n`, error)
+      process.exit(1)
+    }
   }
 
   var obj = getValue(obj, path)
@@ -61,7 +71,6 @@ function log () {
     // util.inspect doc: https://nodejs.org/api/util.html#util_util_inspect_object_options
     console.log(inspect(obj, { depth: depth, colors: colors, maxArrayLength: null }))
   }
-  process.exit(0)
 }
 
 process.stdin
