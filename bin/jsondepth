@@ -14,7 +14,7 @@ if (formatAsJson) {
   if (!(jsonIndentation || jsonIndentation === 0)) jsonIndentation = 2
 }
 
-// Recovering an args arry without the json option
+// Recovering an args array without the json option
 args = argsString.replace(jsonOptionRegex, '').trim().split(' ')
 
 if (args.length === 2) {
