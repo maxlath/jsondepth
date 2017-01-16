@@ -2,8 +2,12 @@
 const inspect = require('util').inspect
 const getValue = require('../lib/get_value')
 const getJsonIndentation = require('../lib/json_indentation')
+const spacedKeysSavers = require('../lib/spaced_keys_savers')
 
-const [ args, formatAsJson, jsonIndentation ] = getJsonIndentation()
+const [ argsString, formatAsJson, jsonIndentation ] = getJsonIndentation()
+// Spaces in keys would cause the command to crash
+// thus, we substitute them before recovering them when needed
+const args = spacedKeysSavers.substituteSpaces(argsString)
 
 if (args.length === 2) {
   var path = args[0]

@@ -91,6 +91,8 @@ curl -s "$url" | jd -1
 curl -s "$url" | jd entities.Q1.aliases.fi.1
 # or to mimick jq syntax
 curl -s "$url" | jd .entities.Q1.aliases.fi.1
+# or with keys with spaces
+curl -s "$url" | jd .entities.Q1.['a key with spaces']
 ```
 
 ### Specify a depth and a path
