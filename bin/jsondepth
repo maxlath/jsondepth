@@ -1,21 +1,9 @@
 #!/usr/bin/env node
 const inspect = require('util').inspect
-const jsonOptionRegex = /(--json|-j)(=(\d{1}))?/
 const getValue = require('../lib/get_value')
+const getJsonIndentation = require('../lib/json_indentation')
 
-var args = process.argv.slice(2)
-const argsString = args.join(' ')
-const jsonOptionRegexMatch = argsString.match(jsonOptionRegex)
-const formatAsJson = jsonOptionRegexMatch != null
-if (formatAsJson) {
-  // Look for an indentation parameter
-  var jsonIndentation = /\d{1}/.test(jsonOptionRegexMatch[3]) && parseInt(jsonOptionRegexMatch[3])
-  // or default to an indentation level of 2
-  if (!(jsonIndentation || jsonIndentation === 0)) jsonIndentation = 2
-}
-
-// Recovering an args array without the json option
-args = argsString.replace(jsonOptionRegex, '').trim().split(' ')
+const [ args, formatAsJson, jsonIndentation ] = getJsonIndentation()
 
 if (args.length === 2) {
   var path = args[0]
