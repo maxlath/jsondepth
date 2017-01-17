@@ -9,17 +9,21 @@ const [ argsString, formatAsJson, jsonIndentation ] = getJsonIndentation()
 // thus, we substitute them before recovering them when needed
 const args = spacedKeysSavers.substituteSpaces(argsString)
 
+// path and depth passed
 if (args.length === 2) {
   var path = args[0]
   var depth = parseInt(args[1])
 } else if (args.length === 1) {
+  // only depth
   if (/^-?\d+$/.test(args[0])) {
     var path = ''
     var depth = parseInt(args[0])
+  // only path
   } else {
     var path = args[0]
     var depth = 0
   }
+// no argument passed
 } else if (args.length === 0) {
   var path = ''
   var depth = 0
