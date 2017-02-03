@@ -72,3 +72,9 @@ function log (chunk) {
 process.stdin
 .on('data', append)
 .on('end', log)
+
+// Prevent logging an EPIPE error when piping the output
+// cf https://github.com/maxlath/wikidata-cli/issues/7
+process.stdout.on('error', function (err) {
+  if (err.code !== 'EPIPE') throw err
+})
