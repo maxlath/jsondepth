@@ -10,5 +10,12 @@ describe('cli', () => {
         done()
       })
     })
+    it('should not throw when the output is truncated', (done) => {
+      execa.shell('cat package.json | jd scripts | head -n 1')
+      .then(res => {
+        res.code.should.equal(0)
+        done()
+      })
+    })
   })
 })
