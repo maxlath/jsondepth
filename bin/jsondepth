@@ -1,82 +1,14 @@
 #!/usr/bin/env node
-const inspect = require('util').inspect
-const getValue = require('../lib/get_value')
-const getJsonIndentation = require('../lib/json_indentation')
-const spacedKeysSavers = require('../lib/spaced_keys_savers')
+const { file } = require('../lib/parse_arguments')
+const { append, log } = require('../lib/aggregator')
 
-const [ argsString, formatAsJson, jsonIndentation ] = getJsonIndentation()
-// Spaces in keys would cause the command to crash
-// thus, we substitute them before recovering them when needed
-const args = spacedKeysSavers.substituteSpaces(argsString)
-
-// path and depth passed
-if (args.length === 2) {
-  var path = args[0]
-  var depth = parseInt(args[1])
-} else if (args.length === 1) {
-  // only depth
-  if (/^-?\d+$/.test(args[0])) {
-    var path = ''
-    var depth = parseInt(args[0])
-  // only path
-  } else {
-    var path = args[0]
-    var depth = 0
-  }
-// no argument passed
-} else if (args.length === 0) {
-  var path = ''
-  var depth = 0
+if (file) {
+  log(file)
 } else {
-  throw new Error('too many arguments')
+  process.stdin
+  .on('data', append)
+  .on('end', log)
 }
-
-var data = ''
-
-function append (buf) { data += buf.toString() }
-
-function log (chunk) {
-  try {
-    // A chunk can be a sub-part of the full data
-    // See the line by line parsing attempt bellow
-    // Beware of chunks that are empty strings that could trigger an infinite loop
-    if (chunk == null) chunk = data
-    var obj = JSON.parse(chunk)
-  } catch (error) {
-    // Try to parse line per line, keeping only lines that could be JSON
-    const lines = chunk.split('\n').filter((line) => line[0] === '{')
-    if (lines.length > 1) {
-      return lines.forEach(log)
-    } else {
-      console.error(`couldn't parse JSON: ${chunk.slice(0, 15)}...\n`, error)
-      process.exit(1)
-    }
-  }
-
-  var obj = getValue(obj, path)
-
-  if (obj == null) {
-    // No value could be found
-    // Return an error code to signal so that commands such as the following can work:
-    // cat package.json | jd nonexistingkey || echo 'key not found, do something else then'
-    return process.exit(1)
-  } else if (typeof obj === 'string') {
-    // Avoid using util.inspect on strings as it keeps the quotes
-    console.log(obj)
-  } else if (formatAsJson) {
-    console.log(JSON.stringify(obj, null, jsonIndentation))
-  } else {
-    // Avoid colorizing when stdout isn't the terminal
-    var colors = process.stdout.isTTY
-    if (depth === -1) depth = Infinity
-    // util.inspect doc: https://nodejs.org/api/util.html#util_util_inspect_object_options
-    console.log(inspect(obj, { depth: depth, colors: colors, maxArrayLength: null }))
-  }
-}
-
-process.stdin
-.on('data', append)
-.on('end', log)
 
 // Prevent logging an EPIPE error when piping the output
 // cf https://github.com/maxlath/wikidata-cli/issues/7
