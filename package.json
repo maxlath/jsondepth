@@ -27,6 +27,7 @@
   },
   "devDependencies": {
     "doctoc": "^1.2.0",
+    "execa": "^0.6.0",
     "git-hooks": "^1.1.8",
     "mocha": "^3.1.2",
     "should": "^11.1.1",
