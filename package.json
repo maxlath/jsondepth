@@ -10,7 +10,8 @@
   "scripts": {
     "test": "mocha",
     "update-toc": "doctoc README.md",
-    "lint": "standard"
+    "lint": "standard",
+    "prepublishOnly": "npm run lint && npm test"
   },
   "keywords": [
     "json",
