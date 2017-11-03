@@ -62,8 +62,10 @@ this is equivalent to the two previous one:
 curl -s "$url" | jd 0
 ```
 <hr>
+
 now let's go one-level deeper:
-```
+
+```sh
 curl -s "$url" | jd 1
 ```
 outputs:
