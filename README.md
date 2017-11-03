@@ -33,8 +33,6 @@ Working with super deep json objects from the terminal is a pain, unless you use
 [jq](https://github.com/stedolan/jq) is an awesome one, but doesn't handle object depths, afaik.<br>
 Here the idea is to **walk through a json object as you would read a summary**: level by level.
 
-The only downside being that the output might not be valid json, due to the wrapped object, but that's a fair price for readability while exploring a data set.
-
 ## Installation
 
 ```sh
