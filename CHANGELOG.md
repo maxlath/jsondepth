@@ -1,6 +1,9 @@
 # CHANGELOG
 *versions follow [SemVer](http://semver.org)*
 
+## 1.8.0 - 2017-12-08
+Shows a help menu when the command is called without argument or stdin
+
 ## 1.7.0 - 2017-02-19
 When no value could be found, returns an error code to signal so that commands such as the following can work:
 ```
