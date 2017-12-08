@@ -1,8 +1,10 @@
 #!/usr/bin/env node
-const { file } = require('../lib/parse_arguments')
+const { file, showHelp } = require('../lib/parse_arguments')
 const { append, log } = require('../lib/aggregator')
 
-if (file) {
+if (showHelp) {
+  require('../lib/show_help')()
+} else if (file) {
   log(file)
 } else {
   process.stdin

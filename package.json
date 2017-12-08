@@ -24,7 +24,8 @@
   "author": "maxlath",
   "license": "MIT",
   "dependencies": {
-    "lodash.values": "^4.3.0"
+    "lodash.values": "^4.3.0",
+    "mdless": "^1.0.2"
   },
   "devDependencies": {
     "doctoc": "^1.2.0",
