@@ -129,6 +129,17 @@ map properties of an array
 curl -s "$url" | jd entities._values._map.id
 # => ['Q1']
 ```
+##### `_first`
+```sh
+echo '["foo", "bar"]' | jd ._first
+# => foo
+```
+
+##### `_last`
+```sh
+echo '["foo", "bar"]' | jd ._first
+# => bar
+```
 
 ### Format the output as valid JSON
 Wrapped results like `{ entities: { Q1: [Object] }, success: 1 }` are more readible but aren't valid JSON. And sometimes, for whatever reason, you want a valid JSON output; there in a option for that: `--json|-j`

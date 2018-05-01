@@ -27,6 +27,18 @@ describe('get value', () => {
     done()
   })
 
+  it('should return the first value', (done) => {
+    var obj = [{a: 1, b: 2}, {a: 3, b: 4}]
+    getValue(obj, '._first').a.should.equal(1)
+    done()
+  })
+
+  it('should return the last value', (done) => {
+    var obj = [{a: 1, b: 2}, {a: 3, b: 4}]
+    getValue(obj, '._last').a.should.equal(3)
+    done()
+  })
+
   it('should return a map of the properties when asked', (done) => {
     var obj = {some: {long: {path: [{a: 123, b: 456}, {a: 789}]}}}
     getValue(obj, 'some.long.path._map.a')[0].should.equal(123)
