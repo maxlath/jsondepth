@@ -158,4 +158,8 @@ curl -s "$url" | jd entities.Q1.aliases --json=4
 Notice that it disables the depth option as it's responsible for the wrapping mechanism.
 
 ### Parse newline delimited JSON
-When the input is [newline delimited JSON](http://ndjson.org/), filters are applied line by line.
+Add the `--line` option to parse the stdin line by line
+```
+curl https://some.ndjson.dump | jd --line .key
+```
+There is a tolerance for JSON lines ending by a comma, and any line that isn't starting by a `{` or a `}` is ignored.

@@ -1,11 +1,20 @@
 #!/usr/bin/env node
-const { file, showHelp } = require('../lib/parse_arguments')
+const { file, showHelp, lineByLine } = require('../lib/parse_arguments')
 const { append, log } = require('../lib/aggregator')
 
 if (showHelp) {
   require('../lib/show_help')()
 } else if (file) {
   log(file)
+} else if (lineByLine) {
+  const split = require('split')
+  process.stdin
+  .pipe(split())
+  .on('data', line => {
+    line = line.replace(/,$/, '')
+    const isValidJsonLine = line[0] === '{' || line.slice(-1)[0] === '}'
+    if (isValidJsonLine) log(line)
+  })
 } else {
   process.stdin
   .on('data', append)
