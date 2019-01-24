@@ -23,8 +23,11 @@ A small command-line tool to walk through the depth levels of a json objects
       - [`_keys`](#_keys)
       - [`_values`](#_values)
       - [`_map`](#_map)
+      - [`_first`](#_first)
+      - [`_last`](#_last)
   - [Format the output as valid JSON](#format-the-output-as-valid-json)
   - [Parse newline delimited JSON](#parse-newline-delimited-json)
+- [See also](#see-also)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -163,3 +166,7 @@ Add the `--line` option to parse the stdin line by line
 curl https://some.ndjson.dump | jd --line .key
 ```
 There is a tolerance for JSON lines ending by a comma, and any line that isn't starting by a `{` or a `}` is ignored.
+
+## See also
+* [jq](https://stedolan.github.io/jq/)
+* [fx](https://github.com/antonmedv/fx)
