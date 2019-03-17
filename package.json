@@ -1,7 +1,7 @@
 {
   "name": "jsondepth",
   "version": "1.9.1",
-  "description": "a small command-line tool to parse JSON to log it with the desired depth",
+  "description": "A small command-line tool to parse JSON and log it with the desired object depth",
   "main": "/bin/jsondepth",
   "bin": {
     "jsondepth": "./bin/jsondepth",
@@ -25,7 +25,6 @@
   "license": "MIT",
   "dependencies": {
     "lodash.values": "^4.3.0",
-    "mdless": "^1.0.2",
     "split": "^1.0.1"
   },
   "devDependencies": {
