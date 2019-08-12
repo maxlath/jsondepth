@@ -2,6 +2,36 @@ require('should')
 const execa = require('execa')
 
 describe('cli', () => {
+  it('should accept keys with spaces', done => {
+    execa.shell(`echo '{"a b": 123 }'| jd 'a b'`)
+    .then(res => {
+      res.code.should.equal(0)
+      res.stdout.should.equal('123')
+      done()
+    })
+    .catch(done)
+  })
+
+  it('should accept keys with brakets', done => {
+    execa.shell(`echo '{"a b": 123 }'| jd '["a b"]'`)
+    .then(res => {
+      res.code.should.equal(0)
+      res.stdout.should.equal('123')
+      done()
+    })
+    .catch(done)
+  })
+
+  it('should accept keys with a point', done => {
+    execa.shell(`echo '{"a b": 123 }'| jd '."a b"'`)
+    .then(res => {
+      res.code.should.equal(0)
+      res.stdout.should.equal('123')
+      done()
+    })
+    .catch(done)
+  })
+
   describe('piped', () => {
     it('should accept JSON on stdin', done => {
       execa.shell('cat package.json | jd license')
