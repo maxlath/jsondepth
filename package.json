@@ -1,9 +1,12 @@
 {
   "name": "jsondepth",
-  "version": "1.9.2",
+  "version": "1.9.3",
   "description": "A small command-line tool to parse JSON and log it with the desired object depth",
   "main": "/bin/jsondepth",
-  "files": [ "lib", "bin" ],
+  "files": [
+    "lib",
+    "bin"
+  ],
   "bin": {
     "jsondepth": "./bin/jsondepth",
     "jd": "./bin/jsondepth"
