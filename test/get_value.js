@@ -15,15 +15,13 @@ describe('get value', () => {
 
   it('should return keys when asked', (done) => {
     var obj = {some: {long: {path: {a: 123, b: 456}}}}
-    getValue(obj, 'some.long.path._keys')[0].should.equal('a')
-    getValue(obj, 'some.long.path._keys')[1].should.equal('b')
+    getValue(obj, 'some.long.path._keys').should.deepEqual([ 'a', 'b' ])
     done()
   })
 
   it('should return values when asked', (done) => {
     var obj = {some: {long: {path: {a: 123, b: 456}}}}
-    getValue(obj, 'some.long.path._values')[0].should.equal(123)
-    getValue(obj, 'some.long.path._values')[1].should.equal(456)
+    getValue(obj, 'some.long.path._values').should.deepEqual([ 123, 456 ])
     done()
   })
 
@@ -41,8 +39,7 @@ describe('get value', () => {
 
   it('should return a map of the properties when asked', (done) => {
     var obj = {some: {long: {path: [{a: 123, b: 456}, {a: 789}]}}}
-    getValue(obj, 'some.long.path._map.a')[0].should.equal(123)
-    getValue(obj, 'some.long.path._map.a')[1].should.equal(789)
+    getValue(obj, 'some.long.path._map.a').should.deepEqual([ 123, 789 ])
     done()
   })
 
@@ -53,10 +50,26 @@ describe('get value', () => {
         {a: [{b: 5, c: 6}, {b: 7, c: 8}]}
       ]
     }
-    getValue(obj, 'data._map.a._map.b')[0][0].should.equal(1)
-    getValue(obj, 'data._map.a._map.b')[0][1].should.equal(3)
-    getValue(obj, 'data._map.a._map.b')[1][0].should.equal(5)
-    getValue(obj, 'data._map.a._map.b')[1][1].should.equal(7)
+    getValue(obj, 'data._map.a._map.b').should.deepEqual([
+      [ 1, 3 ],
+      [ 5, 7 ]
+    ])
+    done()
+  })
+
+  it('should return undefined when one of the value is missing', (done) => {
+    var obj = {
+      data: [
+        {a: [{b: 1, c: 2}, {b: 3, c: 4}]},
+        {d: {}},
+        {a: [{b: 5, c: 6}, {b: 7, c: 8}]}
+      ]
+    }
+    getValue(obj, 'data._map.a._map.b').should.deepEqual([
+      [ 1, 3 ],
+      undefined,
+      [ 5, 7 ]
+    ])
     done()
   })
 })
