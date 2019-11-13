@@ -15,7 +15,8 @@
     "test": "mocha",
     "update-toc": "doctoc README.md",
     "lint": "standard",
-    "prepublishOnly": "npm run lint && npm test"
+    "prepublishOnly": "npm run lint && npm test",
+    "postpublish": "git push --tags"
   },
   "keywords": [
     "json",
