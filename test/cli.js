@@ -1,11 +1,19 @@
 require('should')
-const execa = require('execa')
+const { promisify } = require('util')
+const exec = promisify(require('child_process').exec)
+
+const shellExec = async cmd => {
+  const { stdout, stderr } = await exec(cmd)
+  return {
+    stdout: stdout.trim(),
+    stderr: stderr.trim()
+  }
+}
 
 describe('cli', () => {
   it('should accept keys with spaces', done => {
-    execa.shell(`echo '{"a b": 123 }'| jd 'a b'`)
+    shellExec(`echo '{"a b": 123 }'| jd 'a b'`)
     .then(res => {
-      res.code.should.equal(0)
       res.stdout.should.equal('123')
       done()
     })
@@ -13,9 +21,8 @@ describe('cli', () => {
   })
 
   it('should accept keys with brakets', done => {
-    execa.shell(`echo '{"a b": 123 }'| jd '["a b"]'`)
+    shellExec(`echo '{"a b": 123 }'| jd '["a b"]'`)
     .then(res => {
-      res.code.should.equal(0)
       res.stdout.should.equal('123')
       done()
     })
@@ -23,9 +30,8 @@ describe('cli', () => {
   })
 
   it('should accept keys with a point', done => {
-    execa.shell(`echo '{"a b": 123 }'| jd '."a b"'`)
+    shellExec(`echo '{"a b": 123 }'| jd '."a b"'`)
     .then(res => {
-      res.code.should.equal(0)
       res.stdout.should.equal('123')
       done()
     })
@@ -34,7 +40,7 @@ describe('cli', () => {
 
   describe('piped', () => {
     it('should accept JSON on stdin', done => {
-      execa.shell('cat package.json | jd license')
+      shellExec('cat package.json | jd license')
       .then(res => {
         res.stdout.should.equal('MIT')
         done()
@@ -43,9 +49,8 @@ describe('cli', () => {
     })
 
     it('should not throw when the output is truncated', done => {
-      execa.shell('cat package.json | jd scripts | head -n 1')
+      shellExec('cat package.json | jd scripts | head -n 1')
       .then(res => {
-        res.code.should.equal(0)
         done()
       })
       .catch(done)
@@ -55,7 +60,7 @@ describe('cli', () => {
   // which is the one big non-solved case
   // describe('standalone', () => {
   //   it('should accept a file path as first argument', done => {
-  //     execa.shell('jd package.json license')
+  //     shellExec('jd package.json license')
   //     .then(res => {
   //       console.log('res', res)
   //       res.stdout.should.equal('MIT')

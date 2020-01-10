@@ -32,7 +32,6 @@
     "split": "^1.0.1"
   },
   "devDependencies": {
-    "execa": "^0.10.0",
     "git-hooks": "^1.1.10",
     "mocha": "^5.1.1",
     "should": "^13.2.1",
