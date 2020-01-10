@@ -1,6 +1,9 @@
 # CHANGELOG
 *versions follow [SemVer](http://semver.org)*
 
+## 2.0.0 - 2020-01-10
+BREAKING CHANGE: require Node v8 or higher
+
 ## 1.9.0 - 2018-05-01
 Added _first and _last special keys
 

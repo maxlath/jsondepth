@@ -29,7 +29,6 @@
   "author": "maxlath",
   "license": "MIT",
   "dependencies": {
-    "lodash.values": "^4.3.0",
     "split": "^1.0.1"
   },
   "devDependencies": {
@@ -38,6 +37,9 @@
     "mocha": "^5.1.1",
     "should": "^13.2.1",
     "standard": "^10.0.3"
+  },
+  "engines": {
+    "node": ">= 8"
   },
   "repository": {
     "type": "git",
