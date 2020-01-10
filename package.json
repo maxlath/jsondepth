@@ -1,6 +1,6 @@
 {
   "name": "jsondepth",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "A small command-line tool to parse JSON and log it with the desired object depth",
   "main": "/bin/jsondepth",
   "files": [
