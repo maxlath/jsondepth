@@ -1,10 +1,24 @@
 #!/usr/bin/env node
-const { file, showHelp, lineByLine } = require('../lib/parse_arguments')
-const { append, log } = require('../lib/aggregator')
+const { program } = require('commander')
+const { version, description } = require('../package.json')
+const { append, Log } = require('../lib/aggregator')
 
-if (showHelp) {
-  require('../lib/show_help')()
-} else if (file) {
+program
+.version(version)
+.description(description)
+.arguments('[file-path] [json-path] [depth]')
+.option('-j, --json [number]', 'Format output as JSON. Pass a number as argument to set the indentation (default: 2)')
+.option('-l, --line', 'Parse the input line by line')
+.parse(process.argv)
+
+const { json, line: lineByLine } = program.opts()
+const formatAsJson = json != null
+const jsonIndentation = json || 2
+
+const { file, jsonPath, depth } = require('../lib/parse_arguments')(program)
+const log = Log(jsonPath, depth, formatAsJson, jsonIndentation)
+
+if (file) {
   log(file)
 } else if (lineByLine) {
   const split = require('split')

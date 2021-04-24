@@ -29,6 +29,7 @@
   "author": "maxlath",
   "license": "MIT",
   "dependencies": {
+    "commander": "^7.2.0",
     "split": "^1.0.1"
   },
   "devDependencies": {
