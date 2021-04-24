@@ -2,52 +2,52 @@ require('should')
 const getValue = require('../lib/get_value')
 
 describe('get value', () => {
-  it('should be a function', (done) => {
+  it('should be a function', done => {
     getValue.should.be.a.Function()
     done()
   })
 
-  it('should get the value at the end of the path', (done) => {
-    var obj = {some: {long: {path: {val: 123}}}}
+  it('should get the value at the end of the path', done => {
+    const obj = { some: { long: { path: { val: 123 } } } }
     getValue(obj, 'some.long.path.val').should.equal(123)
     done()
   })
 
-  it('should return keys when asked', (done) => {
-    var obj = {some: {long: {path: {a: 123, b: 456}}}}
+  it('should return keys when asked', done => {
+    const obj = { some: { long: { path: { a: 123, b: 456 } } } }
     getValue(obj, 'some.long.path._keys').should.deepEqual([ 'a', 'b' ])
     done()
   })
 
-  it('should return values when asked', (done) => {
-    var obj = {some: {long: {path: {a: 123, b: 456}}}}
+  it('should return values when asked', done => {
+    const obj = { some: { long: { path: { a: 123, b: 456 } } } }
     getValue(obj, 'some.long.path._values').should.deepEqual([ 123, 456 ])
     done()
   })
 
-  it('should return the first value', (done) => {
-    var obj = [{a: 1, b: 2}, {a: 3, b: 4}]
+  it('should return the first value', done => {
+    const obj = [ { a: 1, b: 2 }, { a: 3, b: 4 } ]
     getValue(obj, '._first').a.should.equal(1)
     done()
   })
 
-  it('should return the last value', (done) => {
-    var obj = [{a: 1, b: 2}, {a: 3, b: 4}]
+  it('should return the last value', done => {
+    const obj = [ { a: 1, b: 2 }, { a: 3, b: 4 } ]
     getValue(obj, '._last').a.should.equal(3)
     done()
   })
 
-  it('should return a map of the properties when asked', (done) => {
-    var obj = {some: {long: {path: [{a: 123, b: 456}, {a: 789}]}}}
+  it('should return a map of the properties when asked', done => {
+    const obj = { some: { long: { path: [ { a: 123, b: 456 }, { a: 789 } ] } } }
     getValue(obj, 'some.long.path._map.a').should.deepEqual([ 123, 789 ])
     done()
   })
 
-  it('should return a map recursively', (done) => {
-    var obj = {
+  it('should return a map recursively', done => {
+    const obj = {
       data: [
-        {a: [{b: 1, c: 2}, {b: 3, c: 4}]},
-        {a: [{b: 5, c: 6}, {b: 7, c: 8}]}
+        { a: [ { b: 1, c: 2 }, { b: 3, c: 4 } ] },
+        { a: [ { b: 5, c: 6 }, { b: 7, c: 8 } ] }
       ]
     }
     getValue(obj, 'data._map.a._map.b').should.deepEqual([
@@ -57,12 +57,12 @@ describe('get value', () => {
     done()
   })
 
-  it('should return undefined when one of the value is missing', (done) => {
-    var obj = {
+  it('should return undefined when one of the value is missing', done => {
+    const obj = {
       data: [
-        {a: [{b: 1, c: 2}, {b: 3, c: 4}]},
-        {d: {}},
-        {a: [{b: 5, c: 6}, {b: 7, c: 8}]}
+        { a: [ { b: 1, c: 2 }, { b: 3, c: 4 } ] },
+        { d: {} },
+        { a: [ { b: 5, c: 6 }, { b: 7, c: 8 } ] }
       ]
     }
     getValue(obj, 'data._map.a._map.b').should.deepEqual([
