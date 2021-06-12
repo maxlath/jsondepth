@@ -13,7 +13,8 @@ program
 
 const { json, line: lineByLine } = program.opts()
 const formatAsJson = json != null
-const jsonIndentation = json || 2
+let jsonIndentation = json || '2'
+jsonIndentation = parseInt(jsonIndentation.replace(/^=/, ''))
 
 const { file, jsonPath, depth } = require('../lib/parse_arguments')(program)
 const log = Log(jsonPath, depth, formatAsJson, jsonIndentation)
