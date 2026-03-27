@@ -48,10 +48,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/maxlath/jsondepth.git"
+    "url": "https://codeberg.org/maxlath/jsondepth"
   },
   "bugs": {
-    "url": "https://github.com/maxlath/jsondepth/issues"
+    "url": "https://codeberg.org/maxlath/jsondepth/issues"
   },
-  "homepage": "https://github.com/maxlath/jsondepth#readme"
+  "homepage": "https://codeberg.org/maxlath/jsondepth#readme"
 }
